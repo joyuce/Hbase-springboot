@@ -49,7 +49,8 @@ public class HconnectionFactory implements InitializingBean {
     public static void main(String[] args) throws IOException {
         //第一步，设置HBsae配置信息
         Configuration configuration = HBaseConfiguration.create();
-        configuration.set("hbase.zookeeper.quorum","xx");  //hbase 服务地址
+        //hbase 服务地址
+        configuration.set("hbase.zookeeper.quorum","xx");
         //这里使用的是接口Admin   该接口有一个实现类HBaseAdmin   也可以直接使用这个实现类
         // HBaseAdmin baseAdmin = new HBaseAdmin(configuration);
         Admin admin = ConnectionFactory.createConnection(configuration).getAdmin();
@@ -58,7 +59,7 @@ public class HconnectionFactory implements InitializingBean {
                 //获取到数据库所有表信息
                 HTableDescriptor[] allTable = admin.listTables();
                 for (HTableDescriptor hTableDescriptor : allTable) {
-                    System.out.println(hTableDescriptor.getNameAsString());
+                    System.err.println(hTableDescriptor.getNameAsString());
                 }
             }catch (IOException e) {
                 e.printStackTrace();
